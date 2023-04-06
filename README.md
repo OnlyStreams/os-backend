@@ -14,7 +14,7 @@ Install and freeze to *requirements.lock.txt* and update *requirements.txt* acco
 ## Development setup
 
 1. Create a new virtual environment.
-2. Install the packages using `pip install -r requirements.txt`.
+2. Install the packages using `pip install -r requirements.lock.txt`.
 3. Create a new `.env` file and put the following inside:
     ```
    # Django secret key used for hashing (do not share!)
@@ -91,4 +91,14 @@ Code formatting and linting is done via:
 - [flake8](https://flake8.pycqa.org/en/latest/)
 - [isort](https://pycqa.github.io/isort/)
 
-TODO: install and configure [pre-commit](https://pre-commit.com/)
+To setup Git hooks to automatically lint and format your code:
+
+1. Install the Git hook via [pre-commit](https://pre-commit.com/):
+   ```
+   $ pre-commit install
+   ```
+2. Test the hook:
+   ```
+   $ pre-commit run --all-files
+   ```
+3. Voila! All the linters and formatters are going to get called before you commit.
