@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     # 3rd party
     "corsheaders",
     "rest_framework",
+    "django_filters",
     # custom
+    "api.apps.ApiConfig",
 ]
 
 SITE_ID = 1
@@ -124,6 +126,42 @@ API_SETTINGS = {
     "VERSION": os.environ.get("API_VERSION"),
     "AUTHORS": os.environ.get("API_AUTHORS").split(","),
 }
+
+
+# djangorestframework
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        # default throttling rates
+        "anon": "10/min",
+        "user": "60/min",
+        # specific throttling rates
+        # 'low' is basically enabled by default
+        "low_burst": "20/min",
+        "low_sustained": "2500/day",
+        "medium_burst": "15/min",
+        "medium_sustained": "1250/day",
+        "high_burst": "10/min",
+        "high_sustained": "50/day",
+    },
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_PAGINATION_CLASS": "core.pagination.OffsetPagination",
+    "PAGE_SIZE": 10,
+    "MAX_LIMIT": 10,
+}
+
+if not DEBUG:
+    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = [
+        "rest_framework.renderers.JSONRenderer",
+    ]
+    REST_FRAMEWORK["DEFAULT_PARSER_CLASSES"] = [
+        "rest_framework.parsers.JSONParser",
+    ]
 
 
 # django-cors-headers
