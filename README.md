@@ -29,6 +29,10 @@ Install and freeze to *requirements.lock.txt* and update *requirements.txt* acco
    CORS_ALLOWED_ORIGINS=http://localhost:3000 http://127.0.0.1:3000
    TIMEZONE=Europe/Berlin
    
+   SECURE_HSTS=false
+   # dev=30, prod=2592000, only taken into account if SECURE_HSTS is enabled
+   SECURE_HSTS_SECONDS=30
+   
    DATABASE_ENGINE=django.db.backends.postgresql_psycopg2
    DATABASE_NAME=<db_name>
    DATABASE_USER=<db_user>
@@ -42,8 +46,8 @@ Install and freeze to *requirements.lock.txt* and update *requirements.txt* acco
    API_VERSION=1.0
    API_AUTHORS=Nik Tomazic (duplxey)
    
-   STATIC_ROOT=/var/www/static/
-   MEDIA_ROOT=/var/www/media/
+   STATIC_ROOT=/var/www/staticfiles/
+   MEDIA_ROOT=/var/www/mediafiles/
     ```
 4. Get [PostgreSQL](https://www.postgresql.org/) up and running (either with Docker or by [installing it locally](https://www.postgresql.org/download/)).
     ```sh

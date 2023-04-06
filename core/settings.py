@@ -97,6 +97,23 @@ DATABASES = {
 }
 
 
+# HSTS
+# https://realpython.com/django-nginx-gunicorn/#taking-it-one-step-further-with-hsts
+
+if os.environ.get("SECURE_HSTS", False).lower() in ["true", "t", "1"]:
+    SECURE_HSTS_SECONDS = os.environ.get("SECURE_HSTS_SECONDS", 30)
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+
+# Referrer-Policy
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+
+if not DEBUG:
+    SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -155,12 +172,13 @@ REST_FRAMEWORK = {
     "MAX_LIMIT": 10,
 }
 
-if not DEBUG:
-    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = [
-        "rest_framework.renderers.JSONRenderer",
-    ]
+if DEBUG:
     REST_FRAMEWORK["DEFAULT_PARSER_CLASSES"] = [
         "rest_framework.parsers.JSONParser",
+    ]
+else:
+    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = [
+        "rest_framework.renderers.JSONRenderer",
     ]
 
 
