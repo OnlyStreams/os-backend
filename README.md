@@ -36,3 +36,13 @@ $ python ./manage.py test animals.tests.AnimalTestCase -v 2
 # Run just one test method
 $ python ./manage.py test animals.tests.AnimalTestCase.test_animals_can_speak -v 2
  ```
+
+## Code linting & formatting
+
+Code formatting and linting is done via:
+
+- [black](https://black.readthedocs.io/en/stable/)
+- [flake8](https://flake8.pycqa.org/en/latest/)
+- [isort](https://pycqa.github.io/isort/)
+
+TODO: install and configure [pre-commit](https://pre-commit.com/)
