@@ -29,6 +29,12 @@ Install and freeze to *requirements.lock.txt* and update *requirements.txt* acco
    CORS_ALLOWED_ORIGINS=http://localhost:3000 http://127.0.0.1:3000
    TIMEZONE=Europe/Berlin
    
+   API_NAME=os-backend
+   API_DESCRIPTION=there are no accidents
+   API_URL=http://localhost:8000/api/
+   API_VERSION=1.0
+   API_AUTHORS=Nik Tomazic (duplxey)
+   
    SECURE_HSTS=false
    # dev=30, prod=2592000, only taken into account if SECURE_HSTS is enabled
    SECURE_HSTS_SECONDS=30
@@ -39,12 +45,17 @@ Install and freeze to *requirements.lock.txt* and update *requirements.txt* acco
    DATABASE_PASSWORD=<db_password>
    DATABASE_HOST=<db_host>
    DATABASE_PORT=<db_port>
+
+   EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+   EMAIL_HOST=smtp.gmail.com
+   EMAIL_USE_TLS=True
+   EMAIL_PORT=587
+   EMAIL_HOST_USER=<email>
+   EMAIL_HOST_PASSWORD=<email_password>
+   DEFAULT_FROM_EMAIL=<email>
    
-   API_NAME=os-backend
-   API_DESCRIPTION=there are no accidents
-   API_URL=http://localhost:8000/api/
-   API_VERSION=1.0
-   API_AUTHORS=Nik Tomazic (duplxey)
+   EMAIL_CONFIRM_REDIRECT_BASE_URL=http://localhost:3000/email/confirm
+   PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL=http://localhost:3000/password/reset/confirm
    
    STATIC_ROOT=/var/www/staticfiles/
    MEDIA_ROOT=/var/www/mediafiles/

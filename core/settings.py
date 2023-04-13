@@ -207,6 +207,17 @@ else:
     ]
 
 
+# django-all-auth
+# https://django-allauth.readthedocs.io/en/latest/index.html
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_MAX_EMAIL_ADDRESSES = 2
+
+EMAIL_CONFIRM_REDIRECT_BASE_URL = os.environ.get("EMAIL_CONFIRM_REDIRECT_BASE_URL")
+PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL = os.environ.get("PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL")
+
+
 # dj-rest-auth & djangorestframework-simplejwt
 # https://dj-rest-auth.readthedocs.io/en/latest/index.html
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html
@@ -224,6 +235,17 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": True,
     "SIGNING_KEY": os.environ.get("JWT_SECRET_KEY"),
 }
+
+
+# Email settings
+
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 
 
 # Internationalization
