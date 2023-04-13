@@ -23,6 +23,7 @@ from core import settings
 urlpatterns = [
     path("", include("api.urls")),
     path("api/", include("api.urls")),
+    path("api/auth/", include("authentication.urls")),
     path("admin/", admin.site.urls),
 ]
 
