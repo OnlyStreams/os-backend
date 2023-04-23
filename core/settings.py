@@ -235,6 +235,7 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": True,
     "SIGNING_KEY": os.environ.get("JWT_SECRET_KEY"),
+    "ALGORITHM": "HS512",
 }
 
 
