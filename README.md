@@ -35,6 +35,10 @@ Install and freeze to *requirements.lock.txt* and update *requirements.txt* acco
    API_VERSION=1.0
    API_AUTHORS=Nik Tomazic (duplxey)
    
+   # These properties are used by the "createsu" command.
+   SUPERUSER_USERNAME=admin
+   SUPERUSER_PASSWORD=complexpassword123
+   
    SECURE_HSTS=false
    # dev=30, prod=2592000, only taken into account if SECURE_HSTS is enabled
    SECURE_HSTS_SECONDS=30
