@@ -22,7 +22,7 @@ class StreamModifyView(APIView):
 
         url = request.data.get("url", None)
         title = request.data.get("title", None)
-        description = request.data.get("title", None)
+        description = request.data.get("description", None)
         is_streaming = request.data.get("is_streaming", None)
         viewers = request.data.get("viewers", None)
 
