@@ -25,6 +25,7 @@ urlpatterns = [
     path("api/", include("api.urls")),
     path("api/auth/", include("authentication.urls")),
     path("api/stream/", include("stream.urls")),
+    path("api/token/", include("tokens.urls")),
     path("admin/", admin.site.urls),
 ]
 
