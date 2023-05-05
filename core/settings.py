@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "api.apps.ApiConfig",
     "authentication.apps.AuthenticationConfig",
     "stream.apps.StreamConfig",
+    "tokens.apps.TokensConfig",
 ]
 
 SITE_ID = 1
