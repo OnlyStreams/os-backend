@@ -7,6 +7,7 @@ from stream.serializers import StreamProfileSerializer
 
 
 class StreamViewSet(viewsets.ModelViewSet):
+    permission_classes = []
     serializer_class = StreamProfileSerializer
     queryset = StreamProfile.objects.filter(is_streaming=True)
 
