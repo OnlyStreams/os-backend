@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 
-A = "a"
+A = "b"
 
 
 # Quick-start development settings - unsuitable for production
