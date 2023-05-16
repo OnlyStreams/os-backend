@@ -77,3 +77,10 @@ class GetStreamKeyView(APIView):
                 "stream_key": request.user.streamprofile.stream_key,
             }
         )
+
+
+class MeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        return JsonResponse(StreamProfileSerializer(request.user.streamprofile).data)
