@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from rest_framework import status, viewsets
+from rest_framework import permissions, status, viewsets
 from rest_framework.views import APIView
 
 from stream.models import StreamProfile
@@ -64,5 +64,16 @@ class VerifyStreamKeyView(APIView):
         return JsonResponse(
             {
                 "code": 0,
+            }
+        )
+
+
+class GetStreamKeyView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        return JsonResponse(
+            {
+                "stream_key": request.user.streamprofile.stream_key,
             }
         )
