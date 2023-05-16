@@ -6,13 +6,14 @@ from stream.models import StreamProfile
 
 class StreamProfileSerializer(serializers.ModelSerializer):
     user = SimpleUserSerializer()
+    url = serializers.CharField(source="get_url")
 
     class Meta:
         model = StreamProfile
         fields = [
             "id",
-            "user",
             "url",
+            "user",
             "title",
             "description",
             "is_streaming",

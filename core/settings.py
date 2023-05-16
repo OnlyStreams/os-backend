@@ -276,6 +276,8 @@ STATIC_ROOT = os.environ.get("STATIC_ROOT")
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT")
 
+HLS_SERVER_IP = "http://nimamoseipjashrug:8080/"
+
 
 # WhiteNoise
 # https://whitenoise.readthedocs.io/en/latest/django.html
