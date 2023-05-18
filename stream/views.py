@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from rest_framework import permissions, status, viewsets
+from rest_framework.parsers import FormParser, JSONParser
 from rest_framework.views import APIView
 
 from stream.models import StreamProfile
@@ -48,24 +49,19 @@ class StreamModifyView(APIView):
 
 
 class VerifyStreamKeyView(APIView):
+    parser_classes = (FormParser, JSONParser)
     permission_classes = []
 
     def post(self, request):
-        stream_key = request.data.get("stream")
-
+        stream_key = request.data.get("name")
         if not StreamProfile.objects.filter(stream_key=stream_key).exists():
-            return JsonResponse(
-                {
-                    "code": 1,
-                },
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
+            return JsonResponse({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return JsonResponse(
-            {
-                "code": 0,
-            }
-        )
+        username = StreamProfile.objects.filter(stream_key=stream_key).first().user.username
+        response = JsonResponse({}, status=status.HTTP_300_MULTIPLE_CHOICES)
+        response["Location"] = username
+
+        return response
 
 
 class GetStreamKeyView(APIView):
