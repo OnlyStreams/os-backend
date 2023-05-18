@@ -48,7 +48,7 @@ class StreamModifyView(APIView):
         return JsonResponse(StreamProfileSerializer(stream_profile).data)
 
 
-class VerifyStreamKeyView(APIView):
+class OnStreamPublishView(APIView):
     parser_classes = (FormParser, JSONParser)
     permission_classes = []
 
@@ -57,11 +57,53 @@ class VerifyStreamKeyView(APIView):
         if not StreamProfile.objects.filter(stream_key=stream_key).exists():
             return JsonResponse({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        username = StreamProfile.objects.filter(stream_key=stream_key).first().user.username
+        stream_profile = StreamProfile.objects.filter(stream_key=stream_key).first()
+        stream_profile.is_streaming = True
+        stream_profile.viewers = 0
+        stream_profile.save()
+
+        username = stream_profile.user.username
         response = JsonResponse({}, status=status.HTTP_300_MULTIPLE_CHOICES)
         response["Location"] = username
 
         return response
+
+
+class OnStreamPublishDoneView(APIView):
+    parser_classes = (FormParser, JSONParser)
+    permission_classes = []
+
+    def post(self, request):
+        stream_key = request.data.get("name")
+        if not StreamProfile.objects.filter(stream_key=stream_key).exists():
+            return JsonResponse({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        stream_profile = StreamProfile.objects.filter(stream_key=stream_key).first()
+        stream_profile.is_streaming = False
+        stream_profile.viewers = 0
+        stream_profile.save()
+
+        return JsonResponse({}, status=status.HTTP_200_OK)
+
+
+class OnStreamPlayView(APIView):
+    parser_classes = (FormParser, JSONParser)
+    permission_classes = []
+
+    def post(self, request):
+        print(request.data)
+
+        return JsonResponse({}, status=status.HTTP_200_OK)
+
+
+class OnStreamPlayDoneView(APIView):
+    parser_classes = (FormParser, JSONParser)
+    permission_classes = []
+
+    def post(self, request):
+        print(request.data)
+
+        return JsonResponse({}, status=status.HTTP_200_OK)
 
 
 class GetStreamKeyView(APIView):
